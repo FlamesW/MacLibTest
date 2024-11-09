@@ -387,7 +387,7 @@ function MacLib:Window(Settings)
     title.Text = Settings.Title
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.RichText = true
-    title.TextSize = 18
+    title.TextSize = 21
     title.TextTransparency = 0.1
     title.TextTruncate = Enum.TextTruncate.SplitWord
     title.TextXAlignment = Enum.TextXAlignment.Left
@@ -407,7 +407,7 @@ function MacLib:Window(Settings)
     icon.ImageColor3 = Color3.fromRGB(255, 255, 255)
     icon.BackgroundTransparency = 1
     icon.Size = Settings.ImgSize
-    icon.Position = UDim2.fromOffset(0, 0)
+    icon.Position = UDim2.fromOffset(-0.15, 0,7)
     icon.AnchorPoint = Vector2.new(0, 0.5)
     icon.Parent = title
     
@@ -422,7 +422,7 @@ function MacLib:Window(Settings)
 	subtitle.Text = Settings.Subtitle
 	subtitle.RichText = true
 	subtitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-	subtitle.TextSize = 12
+	subtitle.TextSize = 10
 	subtitle.TextTransparency = 0.7
 	subtitle.TextTruncate = Enum.TextTruncate.SplitWord
 	subtitle.TextXAlignment = Enum.TextXAlignment.Left
