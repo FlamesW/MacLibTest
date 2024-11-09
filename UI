@@ -374,7 +374,7 @@ function MacLib:Window(Settings)
     icon.Image = Settings.Icon
     icon.ImageColor3 = Color3.fromRGB(255, 255, 255)
     icon.BackgroundTransparency = 1
-    icon.Size = UDim2.fromOffset(20, 20)
+    icon.Size = UDim2.fromOffset(24, 24)
     icon.Position = UDim2.fromOffset(5, 5)
     icon.Parent = titleFrame
     
@@ -398,9 +398,10 @@ function MacLib:Window(Settings)
     title.BackgroundTransparency = 1
     title.BorderColor3 = Color3.fromRGB(0, 0, 0)
     title.BorderSizePixel = 0
-    title.Position = UDim2.fromOffset(30, 0)
+    title.Position = UDim2.fromOffset(34, 0)
     title.Size = UDim2.new(1, -50, 0, 20)
     title.Parent = titleFrame
+    
 
 	local subtitle = Instance.new("TextLabel")
 	subtitle.Name = "Subtitle"
