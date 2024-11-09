@@ -375,7 +375,7 @@ function MacLib:Window(Settings)
     icon.ImageColor3 = Color3.fromRGB(255, 255, 255)
     icon.BackgroundTransparency = 1
     icon.Size = Settings.ImgSize
-    icon.Position = UDim2.fromOffset(3, 0)
+    icon.Position = UDim2.fromOffset(0, 0)
     icon.AnchorPoint = Vector2.new(0, 0.5)
     icon.Parent = titleFrame
     
@@ -399,7 +399,7 @@ function MacLib:Window(Settings)
     title.BackgroundTransparency = 1
     title.BorderColor3 = Color3.fromRGB(0, 0, 0)
     title.BorderSizePixel = 0
-    title.Position = UDim2.fromOffset(icon.Size.X.Offset - 15, 0)
+    title.Position = UDim2.fromOffset(icon.Size.X.Offset + 5, 0)
     title.AnchorPoint = Vector2.new(0, 0.5)
     title.Parent = titleFrame
     
