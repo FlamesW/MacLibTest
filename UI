@@ -374,8 +374,9 @@ function MacLib:Window(Settings)
     icon.Image = Settings.Icon
     icon.ImageColor3 = Color3.fromRGB(255, 255, 255)
     icon.BackgroundTransparency = 1
-    icon.Size = UDim2.fromOffset(24, 24)
-    icon.Position = UDim2.fromOffset(5, 5)
+    icon.Size = Settings.ImgSize
+    icon.Position = UDim2.fromOffset(5, 0)
+    icon.AnchorPoint = Vector2.new(0, 0.5)
     icon.Parent = titleFrame
     
     local title = Instance.new("TextLabel")
@@ -392,17 +393,16 @@ function MacLib:Window(Settings)
     title.TextTransparency = 0.1
     title.TextTruncate = Enum.TextTruncate.SplitWord
     title.TextXAlignment = Enum.TextXAlignment.Left
-    title.TextYAlignment = Enum.TextYAlignment.Top
-    title.AutomaticSize = Enum.AutomaticSize.Y
+    title.TextYAlignment = Enum.TextYAlignment.Center
+    title.AutomaticSize = Enum.AutomaticSize.XY
     title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     title.BackgroundTransparency = 1
     title.BorderColor3 = Color3.fromRGB(0, 0, 0)
     title.BorderSizePixel = 0
-    title.Position = UDim2.fromOffset(34, 0)
-    title.Size = UDim2.new(1, -50, 0, 20)
+    title.Position = UDim2.fromOffset(icon.Size.X.Offset + 10, 0)
+    title.AnchorPoint = Vector2.new(0, 0.5)
     title.Parent = titleFrame
     
-
 	local subtitle = Instance.new("TextLabel")
 	subtitle.Name = "Subtitle"
 	subtitle.FontFace = Font.new(
