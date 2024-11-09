@@ -369,16 +369,6 @@ function MacLib:Window(Settings)
     titleFrame.BorderSizePixel = 0
     titleFrame.Size = UDim2.fromScale(1, 1)
     
-    local icon = Instance.new("ImageLabel")
-    icon.Name = "Icon"
-    icon.Image = Settings.Icon
-    icon.ImageColor3 = Color3.fromRGB(255, 255, 255)
-    icon.BackgroundTransparency = 1
-    icon.Size = Settings.ImgSize
-    icon.Position = UDim2.fromOffset(0, 0)
-    icon.AnchorPoint = Vector2.new(0, 0.5)
-    icon.Parent = titleFrame
-    
     local title = Instance.new("TextLabel")
     title.Name = "Title"
     title.FontFace = Font.new(
@@ -402,6 +392,16 @@ function MacLib:Window(Settings)
     title.Position = UDim2.fromOffset(icon.Size.X.Offset + 5, 0)
     title.AnchorPoint = Vector2.new(0, 0.5)
     title.Parent = titleFrame
+
+    local icon = Instance.new("ImageLabel")
+    icon.Name = "Icon"
+    icon.Image = Settings.Icon
+    icon.ImageColor3 = Color3.fromRGB(255, 255, 255)
+    icon.BackgroundTransparency = 1
+    icon.Size = Settings.ImgSize
+    icon.Position = UDim2.fromOffset(0, 0)
+    icon.AnchorPoint = Vector2.new(0, 0.5)
+    icon.Parent = title
     
 	local subtitle = Instance.new("TextLabel")
 	subtitle.Name = "Subtitle"
