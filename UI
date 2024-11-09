@@ -407,7 +407,7 @@ function MacLib:Window(Settings)
     icon.ImageColor3 = Color3.fromRGB(255, 255, 255)
     icon.BackgroundTransparency = 1
     icon.Size = Settings.ImgSize
-    icon.Position = UDim2.fromOffset(-0.15, 0, 0, 7)
+    icon.Position = UDim2.new(-0.150000006, 0, 0, 7)
     icon.AnchorPoint = Vector2.new(0, 0.5)
     icon.Parent = title
     
