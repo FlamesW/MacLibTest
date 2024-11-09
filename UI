@@ -532,6 +532,18 @@ function MacLib:Window(Settings)
 	userAndDisplayFrame.LayoutOrder = 1
 	userAndDisplayFrame.Size = UDim2.new(1, -42, 0, 32)
 
+    local function StatsInfo()
+        while true do
+            local CurrentDate = os.date("%b %d, %Y");
+            local Ping = string.format("%.2f ms", game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue());
+            local Time = os.date("%H:%M");
+                        
+            displayName.Text = Ping .. " | " .. CurrentDate .. " | " .. Time
+            
+            task.wait(1);
+        end
+    end
+    
 	local displayName = Instance.new("TextLabel")
 	displayName.Name = "DisplayName"
 	displayName.FontFace = Font.new(
@@ -539,7 +551,7 @@ function MacLib:Window(Settings)
 		Enum.FontWeight.SemiBold,
 		Enum.FontStyle.Normal
 	)
-	displayName.Text = LocalPlayer.DisplayName
+
 	displayName.TextColor3 = Color3.fromRGB(255, 255, 255)
 	displayName.TextSize = 13
 	displayName.TextTransparency = 0.1
@@ -553,6 +565,7 @@ function MacLib:Window(Settings)
 	displayName.BorderSizePixel = 0
 	displayName.Parent = userAndDisplayFrame
 	displayName.Size = UDim2.fromScale(1,0)
+    task.spawn(StatsInfo)
 
 	local userAndDisplayFrameUIPadding = Instance.new("UIPadding")
 	userAndDisplayFrameUIPadding.Name = "UserAndDisplayFrameUIPadding"
@@ -566,6 +579,26 @@ function MacLib:Window(Settings)
 	userAndDisplayFrameUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	userAndDisplayFrameUIListLayout.Parent = userAndDisplayFrame
 
+    -- // Taken from Sirius source 💞
+    local function format(Int)
+        return string.format("%02i", Int)
+    end
+    
+    local function convertToHMS(Seconds)
+        local Minutes = (Seconds - Seconds % 60) / 60
+        Seconds = Seconds - Minutes * 60
+        local Hours = (Minutes - Minutes % 60) / 60
+        Minutes = Minutes - Hours * 60
+        return format(Hours) .. ":" .. format(Minutes) .. ":" .. format(Seconds)
+    end
+    
+    local function Runtime()
+        while true do
+            username.Text = "RunTime: " .. convertToHMS(time());
+            task.wait(1);
+        end
+    end
+
 	local username = Instance.new("TextLabel")
 	username.Name = "Username"
 	username.FontFace = Font.new(
@@ -573,7 +606,6 @@ function MacLib:Window(Settings)
 		Enum.FontWeight.SemiBold,
 		Enum.FontStyle.Normal
 	)
-	username.Text = "@" .. LocalPlayer.Name
 	username.TextColor3 = Color3.fromRGB(255, 255, 255)
 	username.TextSize = 12
 	username.TextTransparency = 0.7
@@ -588,6 +620,7 @@ function MacLib:Window(Settings)
 	username.LayoutOrder = 1
 	username.Parent = userAndDisplayFrame
 	username.Size = UDim2.fromScale(1,0)
+    task.spawn(Runtime)
 
 	userAndDisplayFrame.Parent = informationGroup
 
