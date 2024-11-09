@@ -5661,6 +5661,18 @@ function MacLib:Demo()
 					Lifetime = 5
 				})
 			end,
+		}),
+		ShowUserInfo = Window:GlobalSetting({
+			Name = "Show User Info",
+			Default = Window:GetUserInfoState(),
+			Callback = function(bool)
+				Window:SetUserInfoState(bool)
+				Window:Notify({
+					Title = Window.Settings.Title,
+					Description = (bool and "Showing" or "Redacted") .. " User Info",
+					Lifetime = 5
+				})
+			end,
 		})
 	}
 
