@@ -361,36 +361,46 @@ function MacLib:Window(Settings)
 		ChangeGlobalSettingsButtonState("Default")
 	end)
 
-	local titleFrame = Instance.new("Frame")
-	titleFrame.Name = "TitleFrame"
-	titleFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	titleFrame.BackgroundTransparency = 1
-	titleFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	titleFrame.BorderSizePixel = 0
-	titleFrame.Size = UDim2.fromScale(1, 1)
-
-	local title = Instance.new("TextLabel")
-	title.Name = "Title"
-	title.FontFace = Font.new(
-		assets.interFont,
-		Enum.FontWeight.SemiBold,
-		Enum.FontStyle.Normal
-	)
-	title.Text = Settings.Title
-	title.TextColor3 = Color3.fromRGB(255, 255, 255)
-	title.RichText = true
-	title.TextSize = 18
-	title.TextTransparency = 0.1
-	title.TextTruncate = Enum.TextTruncate.SplitWord
-	title.TextXAlignment = Enum.TextXAlignment.Left
-	title.TextYAlignment = Enum.TextYAlignment.Top
-	title.AutomaticSize = Enum.AutomaticSize.Y
-	title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	title.BackgroundTransparency = 1
-	title.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	title.BorderSizePixel = 0
-	title.Size = UDim2.new(1, -20, 0, 0)
-	title.Parent = titleFrame
+    local titleFrame = Instance.new("Frame")
+    titleFrame.Name = "TitleFrame"
+    titleFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    titleFrame.BackgroundTransparency = 1
+    titleFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    titleFrame.BorderSizePixel = 0
+    titleFrame.Size = UDim2.fromScale(1, 1)
+    
+    local icon = Instance.new("ImageLabel")
+    icon.Name = "Icon"
+    icon.Image = Settings.Icon
+    icon.ImageColor3 = Color3.fromRGB(255, 255, 255)
+    icon.BackgroundTransparency = 1
+    icon.Size = UDim2.fromOffset(20, 20)
+    icon.Position = UDim2.fromOffset(5, 5)
+    icon.Parent = titleFrame
+    
+    local title = Instance.new("TextLabel")
+    title.Name = "Title"
+    title.FontFace = Font.new(
+        assets.interFont,
+        Enum.FontWeight.SemiBold,
+        Enum.FontStyle.Normal
+    )
+    title.Text = Settings.Title
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.RichText = true
+    title.TextSize = 18
+    title.TextTransparency = 0.1
+    title.TextTruncate = Enum.TextTruncate.SplitWord
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.TextYAlignment = Enum.TextYAlignment.Top
+    title.AutomaticSize = Enum.AutomaticSize.Y
+    title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    title.BackgroundTransparency = 1
+    title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    title.BorderSizePixel = 0
+    title.Position = UDim2.fromOffset(30, 0)
+    title.Size = UDim2.new(1, -50, 0, 20)
+    title.Parent = titleFrame
 
 	local subtitle = Instance.new("TextLabel")
 	subtitle.Name = "Subtitle"
