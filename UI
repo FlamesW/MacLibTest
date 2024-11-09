@@ -399,7 +399,7 @@ function MacLib:Window(Settings)
     title.BackgroundTransparency = 1
     title.BorderColor3 = Color3.fromRGB(0, 0, 0)
     title.BorderSizePixel = 0
-    title.Position = UDim2.fromOffset(icon.Size.X.Offset + 10, 0)
+    title.Position = UDim2.fromOffset(icon.Size.X.Offset - 10, 0)
     title.AnchorPoint = Vector2.new(0, 0.5)
     title.Parent = titleFrame
     
