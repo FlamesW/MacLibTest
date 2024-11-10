@@ -1776,7 +1776,7 @@ function MacLib:Window(Settings)
 						DisabledPosition = UDim2.new(0.5, 0, 0.5, 0),
 					}
 				
-					local Geen = Color3.fromRGB(63, 209, 209)
+					local Geen = Color3.fromRGB(63, 255, 63)
 					local Reb = Color3.fromRGB(192, 46, 46)
 					
 					local function ToggleState(State)
