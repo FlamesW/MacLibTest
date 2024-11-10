@@ -1782,8 +1782,8 @@ function MacLib:Window(Settings)
 						DisabledPosition = UDim2.new(0.5, 0, 0.5, 0),
 					}
 				
-					local Geen = Color3.fromRGB(0, 255, 0)
-					local Reb = Color3.fromRGB(255, 0, 0)
+					local Geen = Color3.fromRGB(60, 227, 110)
+					local Reb = Color3.fromRGB(227, 60, 110)
 				
 					local function ToggleState(State)
 						local transparencyValues = State and {toggle1Transparency.Enabled, togglerHeadTransparency.Enabled}
@@ -1803,7 +1803,6 @@ function MacLib:Window(Settings)
 							Position = position
 						}):Play()
 				
-						toggle1.ImageColor3 = color
 						togglerHead.ImageColor3 = color
 				
 						ToggleFunctions.State = State
