@@ -1711,7 +1711,7 @@ function MacLib:Window(Settings)
 					toggle.BorderSizePixel = 0
 					toggle.Size = UDim2.new(1, 0, 0, 38)
 					toggle.Parent = section
-
+				
 					local toggleName = Instance.new("TextLabel")
 					toggleName.Name = "ToggleName"
 					toggleName.FontFace = Font.new(assets.interFont)
@@ -1732,7 +1732,7 @@ function MacLib:Window(Settings)
 					toggleName.Position = UDim2.fromScale(0, 0.5)
 					toggleName.Size = UDim2.new(1, -50, 0, 0)
 					toggleName.Parent = toggle
-
+				
 					local toggle1 = Instance.new("ImageButton")
 					toggle1.Name = "Toggle"
 					toggle1.Image = assets.toggleBackground
@@ -1746,7 +1746,7 @@ function MacLib:Window(Settings)
 					toggle1.Position = UDim2.fromScale(1, 0.5)
 					toggle1.Size = UDim2.fromOffset(41, 21)
 					toggle1.ImageTransparency = 0.5
-
+				
 					local toggleUIPadding = Instance.new("UIPadding")
 					toggleUIPadding.Name = "ToggleUIPadding"
 					toggleUIPadding.PaddingBottom = UDim.new(0, 1)
@@ -1754,7 +1754,7 @@ function MacLib:Window(Settings)
 					toggleUIPadding.PaddingRight = UDim.new(0, 3)
 					toggleUIPadding.PaddingTop = UDim.new(0, 1)
 					toggleUIPadding.Parent = toggle1
-
+				
 					local togglerHead = Instance.new("ImageLabel")
 					togglerHead.Name = "TogglerHead"
 					togglerHead.Image = assets.togglerHead
@@ -1769,42 +1769,49 @@ function MacLib:Window(Settings)
 					togglerHead.ZIndex = 2
 					togglerHead.Parent = toggle1
 					togglerHead.ImageTransparency = 0.8
-
+				
 					toggle1.Parent = toggle
-
+				
 					local toggle1Transparency = {Enabled = 0, Disabled = 0.5}
 					local togglerHeadTransparency = {Enabled = 0, Disabled = 0.85}
-
+				
 					local TweenSettings = {
 						Info = TweenInfo.new(0.2, Enum.EasingStyle.Sine),
-
+				
 						EnabledPosition = UDim2.new(1, 0, 0.5, 0),
 						DisabledPosition = UDim2.new(0.5, 0, 0.5, 0),
 					}
-
+				
+					local Geen = Color3.fromRGB(0, 255, 0)
+					local Reb = Color3.fromRGB(255, 0, 0)
+				
 					local function ToggleState(State)
 						local transparencyValues = State and {toggle1Transparency.Enabled, togglerHeadTransparency.Enabled}
 							or {toggle1Transparency.Disabled, togglerHeadTransparency.Disabled}
 						local position = State and TweenSettings.EnabledPosition or TweenSettings.DisabledPosition
-
+						local color = State and Geen or Reb
+				
 						Tween(toggle1, TweenSettings.Info, {
 							ImageTransparency = transparencyValues[1]
 						}):Play()
-
+				
 						Tween(togglerHead, TweenSettings.Info, {
 							ImageTransparency = transparencyValues[2]
 						}):Play()
-
+				
 						Tween(togglerHead, TweenSettings.Info, {
 							Position = position
 						}):Play()
-
+				
+						toggle1.ImageColor3 = color
+						togglerHead.ImageColor3 = color
+				
 						ToggleFunctions.State = State
 					end
-
+				
 					local togglebool = ToggleFunctions.Settings.Default
 					ToggleState(togglebool)
-
+				
 					local function Toggle()
 						togglebool = not togglebool
 						ToggleState(togglebool)
@@ -1812,9 +1819,9 @@ function MacLib:Window(Settings)
 							ToggleFunctions.Settings.Callback(togglebool)
 						end
 					end
-
+				
 					toggle1.MouseButton1Click:Connect(Toggle)
-
+				
 					function ToggleFunctions:Toggle()
 						Toggle()
 					end
@@ -1831,13 +1838,13 @@ function MacLib:Window(Settings)
 					function ToggleFunctions:SetVisibility(State)
 						toggle.Visible = State
 					end
-
+				
 					if Flag then
 						MacLib.Options[Flag] = ToggleFunctions
 					end
 					return ToggleFunctions
 				end
-
+				
 				function SectionFunctions:Slider(Settings, Flag)
 					local SliderFunctions = { Settings = Settings, IgnoreConfig = false, Class = "Slider" }
 					local slider = Instance.new("Frame")
