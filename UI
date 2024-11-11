@@ -236,7 +236,7 @@ function MacLib:Window(Settings)
 	maximize.Name = "Maximize"
 	maximize.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
 	maximize.Text = getgenv().Game
-	maximize.Visible = false
+	maximize.Visible = true
 	maximize.TextColor3 = Color3.fromRGB(175, 175, 175)
 	maximize.TextSize = 14
 	maximize.AutoButtonColor = false
@@ -5987,6 +5987,8 @@ task.spawn(function()
 						local HeadShot = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup:FindFirstChild("Headshot");
 	
 						PathDisplay.Text = Ping .. " | " .. CurrentDate .. " | " .. Time;PathDisplay.TextSize = 11;PathUsername.Text = "RunTime: " .. convertToHMS(time());HeadShot.Visible = false;
+						
+						game:GetService("CoreGui").MacLib.Base.Sidebar.WindowControls.Controls.Maximize.BaseUIStroke.Enabled = false;
 					end
 				end
 			end)
