@@ -230,7 +230,7 @@ function MacLib:Window(Settings)
 	maximize.Name = "Maximize"
 	maximize.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
 	maximize.Text = getgenv().Game
-	maximize.TextColor3 = Color3.fromRGB(0, 0, 0)
+	maximize.TextColor3 = Color3.fromRGB(175, 175, 175)
 	maximize.TextSize = 14
 	maximize.AutoButtonColor = false
 	maximize.BackgroundColor3 = Color3.fromRGB(119, 174, 94)
