@@ -33,7 +33,7 @@ local assets = {
 	grid = "rbxassetid://121484455191370",
 	globe = "rbxassetid://9405923687",
 	transform = "rbxassetid://90336395745819",
-	dropdown = "rbxassetid://3429590771",
+	dropdown = "rbxassetid://5279719038",
 	sliderbar = "rbxassetid://18772615246",
 	sliderhead = "rbxassetid://18772834246",
 }
