@@ -4773,11 +4773,17 @@ function MacLib:Window(Settings)
 								Title = "Interface",
 								Description = string.format("Set %q as autoload", name),
 							})
+
+							configSelection:ClearOptions()
+							configSelection:InsertOptions(MacLib:RefreshConfigList())
 						else
 							WindowFunctions:Notify({
 								Title = "Interface",
 								Description = "Please select a valid config to set as autoload.",
 							})
+
+							configSelection:ClearOptions()
+							configSelection:InsertOptions(MacLib:RefreshConfigList())
 						end
 					end,
 				})
