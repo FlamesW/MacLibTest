@@ -1,5 +1,10 @@
 local MacLib = { Options = {}, Folder = "Maclib" }
 
+--// One At a Time
+if game:GetService("CoreGui"):FindFirstChild("MacLib") then
+	return
+end
+
 --// Services
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -31,9 +36,9 @@ local assets = {
 	colorWheel = "rbxassetid://2849458409",
 	colorTarget = "rbxassetid://73265255323268",
 	grid = "rbxassetid://121484455191370",
-	globe = "rbxassetid://9405923687",
+	globe = "rbxassetid://108952102602834",
 	transform = "rbxassetid://90336395745819",
-	dropdown = "rbxassetid://103025208205205",
+	dropdown = "rbxassetid://18865373378",
 	sliderbar = "rbxassetid://18772615246",
 	sliderhead = "rbxassetid://18772834246",
 }
@@ -211,6 +216,7 @@ function MacLib:Window(Settings)
 	minimize.Name = "Minimize"
 	minimize.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
 	minimize.Text = ""
+	minimize.Visible = false
 	minimize.TextColor3 = Color3.fromRGB(0, 0, 0)
 	minimize.TextSize = 14
 	minimize.AutoButtonColor = false
@@ -230,6 +236,7 @@ function MacLib:Window(Settings)
 	maximize.Name = "Maximize"
 	maximize.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
 	maximize.Text = getgenv().Game
+	maximize.Visible = false
 	maximize.TextColor3 = Color3.fromRGB(175, 175, 175)
 	maximize.TextSize = 14
 	maximize.AutoButtonColor = false
@@ -237,6 +244,7 @@ function MacLib:Window(Settings)
 	maximize.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	maximize.BorderSizePixel = 0
 	maximize.LayoutOrder = 1
+	game:GetService("CoreGui").MacLib.Base.Sidebar.WindowControls.Controls.Maximize.BaseUIStroke.Enabled = false;
 
 	local uICorner2 = Instance.new("UICorner")
 	uICorner2.Name = "UICorner"
@@ -5968,19 +5976,21 @@ end
 task.spawn(function()
     if not getgenv().ExecutedInfoStats == true then getgenv().ExecutedInfoStats = true;
         while true do
-            local CurrentDate = os.date("%b %d, %Y");
-            local Ping = string.format("%.2f ms", game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue());
-            local Time = os.date("%H:%M");
-
-            for _,v in ipairs(game:GetService("CoreGui"):GetChildren()) do
-                if v.Name == "MacLib" then
-                    local PathDisplay = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("DisplayName");
-                    local PathUsername = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("Username");
-                    local HeadShot = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup:FindFirstChild("Headshot");
-
-                    PathDisplay.Text = Ping .. " | " .. CurrentDate .. " | " .. Time;PathDisplay.TextSize = 11;PathUsername.Text = "RunTime: " .. convertToHMS(time());HeadShot.Visible = false;
-                end
-            end
+			pcall(function()
+				local CurrentDate = os.date("%b %d, %Y");
+				local Ping = string.format("%.2f ms", game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue());
+				local Time = os.date("%H:%M");
+	
+				for _,v in ipairs(game:GetService("CoreGui"):GetChildren()) do
+					if v.Name == "MacLib" then
+						local PathDisplay = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("DisplayName");
+						local PathUsername = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("Username");
+						local HeadShot = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup:FindFirstChild("Headshot");
+	
+						PathDisplay.Text = Ping .. " | " .. CurrentDate .. " | " .. Time;PathDisplay.TextSize = 11;PathUsername.Text = "RunTime: " .. convertToHMS(time());HeadShot.Visible = false;
+					end
+				end
+			end)
             task.wait(1);
         end
     end
