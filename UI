@@ -4711,6 +4711,25 @@ function MacLib:Window(Settings)
 				})
 
 				configSection:Button({
+					Name = "Delete Config",
+					Callback = function()
+						local success, returned = MacLib:DeleteConfig(configSelection.Value)
+						if not success then
+							WindowFunctions:Notify({
+								Title = "Interface",
+								Description = "Unable to delete config, return error: " .. returned
+							})
+							return
+						end
+				
+						WindowFunctions:Notify({
+							Title = "Interface",
+							Description = string.format("Deleted config %q", configSelection.Value),
+						})
+					end,
+				})
+
+				configSection:Button({
 					Name = "Overwrite Config",
 					Callback = function()
 						local success, returned = MacLib:SaveConfig(configSelection.Value)
@@ -5504,6 +5523,23 @@ function MacLib:Window(Settings)
 				Title = "Interface",
 				Description = string.format("Autoloaded config: %q", name),
 			})
+		end
+	end
+
+	function MacLib:DeleteConfig(Path)
+		if isStudio then return "Config system unavailable." end
+	
+		if not Path then
+			return false, "Please select a config file."
+		end
+	
+		local fullPath = MacLib.Folder .. "/settings/" .. Path .. ".json"
+		
+		if isfile(fullPath) then
+			delfile(fullPath)
+			return true
+		else
+			return false, "Config file does not exist."
 		end
 	end
 
