@@ -4726,6 +4726,9 @@ function MacLib:Window(Settings)
 							Title = "Interface",
 							Description = string.format("Deleted config %q", configSelection.Value),
 						})
+
+						configSelection:ClearOptions()
+						configSelection:InsertOptions(MacLib:RefreshConfigList())
 					end,
 				})
 
@@ -4757,17 +4760,25 @@ function MacLib:Window(Settings)
 				})
 				
 				local autoloadLabel
-				
+
 				configSection:Button({
 					Name = "Set as autoload",
 					Callback = function()
 						local name = configSelection.Value
-						writefile(MacLib.Folder .. "/settings/autoload.txt", name)
-						autoloadLabel:SetDesc("Autoload config: " .. name)
-						WindowFunctions:Notify({
-							Title = "Interface",
-							Description = string.format("Set %q as autoload", name),
-						})
+						if name and name ~= "" then
+							writefile(MacLib.Folder .. "/settings/autoload.txt", name)
+							autoloadLabel:UpdateName("Autoload config: " .. name)
+				
+							WindowFunctions:Notify({
+								Title = "Interface",
+								Description = string.format("Set %q as autoload", name),
+							})
+						else
+							WindowFunctions:Notify({
+								Title = "Interface",
+								Description = "Please select a valid config to set as autoload.",
+							})
+						end
 					end,
 				})
 				
@@ -4776,7 +4787,7 @@ function MacLib:Window(Settings)
 				if isfile(MacLib.Folder .. "/settings/autoload.txt") then
 					local name = readfile(MacLib.Folder .. "/settings/autoload.txt")
 					autoloadLabel:UpdateName("Autoload config: " .. name)
-				end
+				end				
 			end
 
 			tabs[tabSwitcher] = {
