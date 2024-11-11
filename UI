@@ -5987,8 +5987,6 @@ task.spawn(function()
 						local HeadShot = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup:FindFirstChild("Headshot");
 	
 						PathDisplay.Text = Ping .. " | " .. CurrentDate .. " | " .. Time;PathDisplay.TextSize = 11;PathUsername.Text = "RunTime: " .. convertToHMS(time());HeadShot.Visible = false;
-						
-						game:GetService("CoreGui").MacLib.Base.Sidebar.WindowControls.Controls.Maximize.BaseUIStroke.Enabled = false;
 					end
 				end
 			end)
