@@ -2,7 +2,7 @@ local MacLib = { Options = {}, Folder = "Maclib" }
 
 --// One At a Time
 if game:GetService("CoreGui"):FindFirstChild("MacLib") then
-    return
+	return
 end
 
 --// Services
@@ -244,7 +244,6 @@ function MacLib:Window(Settings)
 	maximize.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	maximize.BorderSizePixel = 0
 	maximize.LayoutOrder = 1
-	game:GetService("CoreGui").MacLib.Base.Sidebar.WindowControls.Controls.Maximize.BaseUIStroke.Enabled = false;
 
 	local uICorner2 = Instance.new("UICorner")
 	uICorner2.Name = "UICorner"
