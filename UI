@@ -4729,6 +4729,10 @@ function MacLib:Window(Settings)
 
 						configSelection:ClearOptions()
 						configSelection:InsertOptions(MacLib:RefreshConfigList())
+
+						if not isfile(MacLib.Folder .. "/settings/autoload.txt") then
+							autoloadLabel:UpdateName("Autoload config: None")
+						end	
 					end,
 				})
 
@@ -4782,6 +4786,9 @@ function MacLib:Window(Settings)
 							configSelection:ClearOptions()
 							configSelection:InsertOptions(MacLib:RefreshConfigList())
 						else
+							autoloadLabel:UpdateName("Autoload config: None")
+							delfile(MacLib.Folder .. "/settings/autoload.txt", name)
+
 							WindowFunctions:Notify({
 								Title = "Interface",
 								Description = "Please select a valid config to set as autoload.",
