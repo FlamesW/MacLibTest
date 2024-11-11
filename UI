@@ -4710,6 +4710,8 @@ function MacLib:Window(Settings)
 					end,
 				})
 
+				local autoloadLabel
+
 				configSection:Button({
 					Name = "Delete Config",
 					Callback = function()
@@ -4768,8 +4770,6 @@ function MacLib:Window(Settings)
 					end,
 				})
 				
-				local autoloadLabel
-
 				configSection:Button({
 					Name = "Set as autoload",
 					Callback = function()
