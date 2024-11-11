@@ -5559,12 +5559,25 @@ function MacLib:Window(Settings)
 		
 		if isfile(fullPath) then
 			delfile(fullPath)
-			return true
 		else
 			return false, "Config file does not exist."
 		end
-	end
 
+		local loadPath = MacLib.Folder .. "/settings/autoload.txt"
+		if isfile(loadPath) then
+			local Reading = readfile(loadPath)
+			if Reading == Path then
+				delfile(loadPath)
+				WindowFunctions:Notify({
+					Title = "Interface",
+					Description = "Autoload file also deleted as it matched the deleted config.",
+				})
+			end
+		end
+	
+		return true
+	end
+	
 	function MacLib:SetFolder(Folder)
 		if isStudio then return "Config system unavailable." end
 		
