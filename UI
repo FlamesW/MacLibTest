@@ -4754,6 +4754,11 @@ function MacLib:Window(Settings)
 				configSection:Button({
 					Name = "Refresh Config List",
 					Callback = function()
+						WindowFunctions:Notify({
+							Title = "Interface",
+							Description = string.format("Refreshed config list"),
+						})
+
 						configSelection:ClearOptions()
 						configSelection:InsertOptions(MacLib:RefreshConfigList())
 					end,
