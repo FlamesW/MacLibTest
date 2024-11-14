@@ -197,11 +197,11 @@ function MacLib:Window(Settings)
 	local exit = Instance.new("TextButton")
 	exit.Name = "Exit"
 	exit.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
-	exit.Text = ""
-	exit.TextColor3 = Color3.fromRGB(0, 0, 0)
+	exit.Text = getgenv().CustomPath
+	exit.TextColor3 = Color3.fromRGB(225, 225, 225)
 	exit.TextSize = 14
 	exit.AutoButtonColor = false
-	exit.BackgroundColor3 = Color3.fromRGB(215, 16, 22)
+	exit.BackgroundColor3 = Color3.fromRGB(255, 76, 85)
 	exit.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	exit.BorderSizePixel = 0
 
@@ -235,8 +235,8 @@ function MacLib:Window(Settings)
 	local maximize = Instance.new("TextButton")
 	maximize.Name = "Maximize"
 	maximize.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
-	maximize.Text = getgenv().Game
-	maximize.Visible = true
+	maximize.Text = ""
+	maximize.Visible = false
 	maximize.TextColor3 = Color3.fromRGB(175, 175, 175)
 	maximize.TextSize = 14
 	maximize.AutoButtonColor = false
@@ -414,7 +414,7 @@ function MacLib:Window(Settings)
     icon.ImageColor3 = Color3.fromRGB(255, 255, 255)
     icon.BackgroundTransparency = 1
     icon.Size = Settings.ImgSize
-    icon.Position = UDim2.new(-0.150000006, 0, 0, 7) -- Idk why it doesnt work...
+    icon.Position = UDim2.new(-0.100000006, 0, 0, 7) -- Idk why it doesnt work...
     icon.AnchorPoint = Vector2.new(0, 0.5)
     icon.Parent = title
 
