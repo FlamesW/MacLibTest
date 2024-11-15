@@ -3912,22 +3912,7 @@ function MacLib:Window(Settings)
 					paragraph.BorderColor3 = Color3.fromRGB(0, 0, 0)
 					paragraph.BorderSizePixel = 0
 					paragraph.Size = UDim2.fromScale(1, 0)
-					
-					local layout = Instance.new("UIListLayout")
-					layout.FillDirection = Enum.FillDirection.Horizontal
-					layout.HorizontalAlignment = Enum.HorizontalAlignment.Left
-					layout.VerticalAlignment = Enum.VerticalAlignment.Center
-					layout.Padding = UDim.new(0, 8)
-					layout.Parent = paragraph
-					
-					local iconHeader = Instance.new("ImageLabel")
-					iconHeader.Name = "IconHeader"
-					iconHeader.Image = getgenv().MainIcon
-					iconHeader.BackgroundTransparency = 1
-					iconHeader.Size = Settings.ImgSize
-					iconHeader.Position = UDim2.new(0, 0, 0, 0)
-					iconHeader.Parent = paragraph
-					
+
 					local paragraphHeader = Instance.new("TextLabel")
 					paragraphHeader.Name = "ParagraphHeader"
 					paragraphHeader.FontFace = Font.new(
@@ -3949,7 +3934,7 @@ function MacLib:Window(Settings)
 					paragraphHeader.BorderSizePixel = 0
 					paragraphHeader.Size = UDim2.fromScale(1, 0)
 					paragraphHeader.Parent = paragraph
-					
+
 					local uIListLayout9 = Instance.new("UIListLayout")
 					uIListLayout9.Name = "UIListLayout"
 					uIListLayout9.Padding = UDim.new(0, 15)
@@ -5146,6 +5131,16 @@ function MacLib:Window(Settings)
 		paragraphHeader.Size = UDim2.fromScale(1, 0)
 		paragraphHeader.Parent = paragraph
 
+		local iconHeader = Instance.new("ImageLabel")
+		iconHeader.Name = "IconHeader"
+		iconHeader.Image = Settings.Icon
+		iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		iconHeader.BackgroundTransparency = 1
+		iconHeader.Size = Settings.ImgSize
+		iconHeader.Position = UDim2.new(-0.100000006, 0, 0, 7)
+		iconHeader.AnchorPoint = Vector2.new(0, 0.5)
+		iconHeader.Parent = paragraphHeader
+
 		local uIListLayout = Instance.new("UIListLayout")
 		uIListLayout.Name = "UIListLayout"
 		uIListLayout.Padding = UDim.new(0, 15)
@@ -5345,7 +5340,7 @@ function MacLib:Window(Settings)
 		onUnloadCallback = callback
 	end
 
-	local MenuKeybind = Settings.Keybind or Enum.KeyCode.RightControl
+	local MenuKeybind = Settings.Keybind or Enum.KeyCode.J
 
 	local function ToggleMenu()
 		local state = not WindowFunctions:GetState()
@@ -5368,7 +5363,7 @@ function MacLib:Window(Settings)
 	exit.MouseButton1Click:Connect(function()
 		WindowFunctions:Dialog({
 			Title = Settings.Title,
-			Description = "Are you sure you want to exit the menu? You will lose any unsaved configurations.",
+			Description = "Are you sure you want to exit the menu?",
 			Buttons = {
 				{
 					Name = "Confirm",
