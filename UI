@@ -5110,16 +5110,6 @@ function MacLib:Window(Settings)
 		paragraph.BorderSizePixel = 0
 		paragraph.Size = UDim2.new(1, 0, 0, 38)
 		
-		local iconHeader = Instance.new("ImageLabel")
-		iconHeader.Name = "IconHeader"
-		iconHeader.Image = getgenv().MainIcon
-		iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
-		iconHeader.BackgroundTransparency = 1
-		iconHeader.Size = UDim2.fromOffset(27, 27)
-		iconHeader.Position = UDim2.new(0, 5, 0, 7)
-		iconHeader.AnchorPoint = Vector2.new(0, 0)
-		iconHeader.Parent = paragraph
-		
 		local paragraphHeader = Instance.new("TextLabel")
 		paragraphHeader.Name = "ParagraphHeader"
 		paragraphHeader.FontFace = Font.new(
@@ -5128,9 +5118,9 @@ function MacLib:Window(Settings)
 			Enum.FontStyle.Normal
 		)
 		paragraphHeader.RichText = true
-		paragraphHeader.Text = Settings.Title
+		paragraphHeader.Text = string.rep(" ",8) .. Settings.Title		
 		paragraphHeader.TextColor3 = Color3.fromRGB(255, 255, 255)
-		paragraphHeader.TextSize = 18
+		paragraphHeader.TextSize = 21
 		paragraphHeader.TextTransparency = 0.4
 		paragraphHeader.TextWrapped = true
 		paragraphHeader.AutomaticSize = Enum.AutomaticSize.Y
@@ -5140,7 +5130,17 @@ function MacLib:Window(Settings)
 		paragraphHeader.BorderSizePixel = 0
 		paragraphHeader.Size = UDim2.new(1, -40, 0, 0)
 		paragraphHeader.Position = UDim2.new(0, 40, 0, 0) 
-		paragraphHeader.Parent = paragraph		
+		paragraphHeader.Parent = paragraph	
+		
+		local iconHeader = Instance.new("ImageLabel")
+		iconHeader.Name = "IconHeader"
+		iconHeader.Image = getgenv().MainIcon
+		iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		iconHeader.BackgroundTransparency = 1
+		iconHeader.Size = UDim2.fromOffset(27, 27)
+		iconHeader.Position = UDim2.new(0, 10, 0, 1)
+		iconHeader.AnchorPoint = Vector2.new(0, 0)
+		iconHeader.Parent = ParagraphHeader
 
 		local uIListLayout = Instance.new("UIListLayout")
 		uIListLayout.Name = "UIListLayout"
