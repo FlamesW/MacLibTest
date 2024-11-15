@@ -5139,7 +5139,7 @@ function MacLib:Window(Settings)
 		iconHeader.Size = Settings.ImgSize
 		iconHeader.Position = UDim2.new(-0.100000006, 0, 0, 7)
 		iconHeader.AnchorPoint = Vector2.new(0, 0.5)
-		iconHeader.Parent = paragraphHeader
+		iconHeader.Parent = paragraph
 
 		local uIListLayout = Instance.new("UIListLayout")
 		uIListLayout.Name = "UIListLayout"
