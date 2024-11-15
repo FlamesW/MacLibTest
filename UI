@@ -4879,7 +4879,7 @@ function MacLib:Window(Settings)
 		notificationTitle.RichText = true
 		notificationTitle.Text = Settings.Title
 		notificationTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-		notificationTitle.TextSize = 13
+		notificationTitle.TextSize = 15
 		notificationTitle.TextTransparency = 0.2
 		notificationTitle.TextTruncate = Enum.TextTruncate.SplitWord
 		notificationTitle.TextXAlignment = Enum.TextXAlignment.Left
@@ -4896,8 +4896,8 @@ function MacLib:Window(Settings)
 		notificationIcon.Image = getgenv().MainIcon
 		notificationIcon.ImageColor3 = Color3.fromRGB(255, 255, 255)
 		notificationIcon.BackgroundTransparency = 1
-		notificationIcon.Size = UDim2.fromOffset(27, 27)
-		notificationIcon.Position = UDim2.new(0, 10, 0, 1)
+		notificationIcon.Size = UDim2.fromOffset(15, 15)
+		notificationIcon.Position = UDim2.new(0, 0, 0, 0)
 		notificationIcon.AnchorPoint = Vector2.new(0, 0)
 		notificationIcon.Parent = notificationTitle
 
@@ -4917,7 +4917,7 @@ function MacLib:Window(Settings)
 		)
 		notificationDescription.Text = Settings.Description
 		notificationDescription.TextColor3 = Color3.fromRGB(255, 255, 255)
-		notificationDescription.TextSize = 11
+		notificationDescription.TextSize = 10
 		notificationDescription.TextTransparency = 0.5
 		notificationDescription.TextWrapped = true
 		notificationDescription.RichText = true
