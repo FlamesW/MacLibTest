@@ -5133,7 +5133,7 @@ function MacLib:Window(Settings)
 
 		local iconHeader = Instance.new("ImageLabel")
 		iconHeader.Name = "IconHeader"
-		iconHeader.Image = Settings.Icon
+		iconHeader.Image = getgenv().MainIcon
 		iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
 		iconHeader.BackgroundTransparency = 1
 		iconHeader.Size = Settings.ImgSize
