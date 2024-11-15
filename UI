@@ -5110,6 +5110,16 @@ function MacLib:Window(Settings)
 		paragraph.BorderSizePixel = 0
 		paragraph.Size = UDim2.new(1, 0, 0, 38)
 
+		local iconHeader = Instance.new("ImageLabel")
+		iconHeader.Name = "IconHeader"
+		iconHeader.Image = getgenv().MainIcon
+		iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		iconHeader.BackgroundTransparency = 1
+		iconHeader.Size = Settings.ImgSize
+		iconHeader.Position = UDim2.new(-0.100000006, 0, 0, 7)
+		iconHeader.AnchorPoint = Vector2.new(0, 0.5)
+		iconHeader.Parent = paragraph
+
 		local paragraphHeader = Instance.new("TextLabel")
 		paragraphHeader.Name = "ParagraphHeader"
 		paragraphHeader.FontFace = Font.new(
@@ -5130,16 +5140,6 @@ function MacLib:Window(Settings)
 		paragraphHeader.BorderSizePixel = 0
 		paragraphHeader.Size = UDim2.fromScale(1, 0)
 		paragraphHeader.Parent = paragraph
-
-		local iconHeader = Instance.new("ImageLabel")
-		iconHeader.Name = "IconHeader"
-		iconHeader.Image = getgenv().MainIcon
-		iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
-		iconHeader.BackgroundTransparency = 1
-		iconHeader.Size = Settings.ImgSize
-		iconHeader.Position = UDim2.new(-0.100000006, 0, 0, 7)
-		iconHeader.AnchorPoint = Vector2.new(0, 0.5)
-		iconHeader.Parent = paragraph
 
 		local uIListLayout = Instance.new("UIListLayout")
 		uIListLayout.Name = "UIListLayout"
