@@ -4674,7 +4674,7 @@ function MacLib:Window(Settings)
 					Callback = function()
 						if not inputPath or string.gsub(inputPath, " ", "") == "" then
 							WindowFunctions:Notify({
-								Title = string.rep(" ",3) .. Settings.Title,
+								Title = string.rep(" ",3) .. "Settings Manager",
 								Description = "Config name cannot be empty."
 							})
 							return
@@ -4683,13 +4683,13 @@ function MacLib:Window(Settings)
 						local success, returned = MacLib:SaveConfig(inputPath)
 						if not success then
 							WindowFunctions:Notify({
-								Title = string.rep(" ",3) .. Settings.Title,
+								Title = string.rep(" ",3) .. "Settings Manager",
 								Description = "Unable to save config, return error: " .. returned
 							})
 						end
 
 						WindowFunctions:Notify({
-							Title = string.rep(" ",3) .. Settings.Title,
+							Title = string.rep(" ",3) .. "Settings Manager",
 							Description = string.format("Created config %q", inputPath),
 						})
 
@@ -4704,14 +4704,14 @@ function MacLib:Window(Settings)
 						local success, returned = MacLib:LoadConfig(configSelection.Value)
 						if not success then
 							WindowFunctions:Notify({
-								Title = string.rep(" ",3) .. Settings.Title,
+								Title = string.rep(" ",3) .. "Settings Manager",
 								Description = "Unable to load config, return error: " .. returned
 							})
 							return
 						end
 
 						WindowFunctions:Notify({
-							Title = string.rep(" ",3) .. Settings.Title,
+							Title = string.rep(" ",3) .. "Settings Manager",
 							Description = string.format("Loaded config %q", configSelection.Value),
 						})
 					end,
@@ -4725,14 +4725,14 @@ function MacLib:Window(Settings)
 						local success, returned = MacLib:DeleteConfig(configSelection.Value)
 						if not success then
 							WindowFunctions:Notify({
-								Title = string.rep(" ",3) .. Settings.Title,
+								Title = string.rep(" ",3) .. "Settings Manager",
 								Description = "Unable to delete config, return error: " .. returned
 							})
 							return
 						end
 				
 						WindowFunctions:Notify({
-							Title = string.rep(" ",3) .. Settings.Title,
+							Title = string.rep(" ",3) .. "Settings Manager",
 							Description = string.format("Deleted config %q", configSelection.Value),
 						})
 
@@ -4751,14 +4751,14 @@ function MacLib:Window(Settings)
 						local success, returned = MacLib:SaveConfig(configSelection.Value)
 						if not success then
 							WindowFunctions:Notify({
-								Title = string.rep(" ",3) .. Settings.Title,
+								Title =string.rep(" ",3) .. "Settings Manager",
 								Description = "Unable to overwrite config, return error: " .. returned
 							})
 							return
 						end
 
 						WindowFunctions:Notify({
-							Title = string.rep(" ",3) .. Settings.Title,
+							Title =string.rep(" ",3) .. "Settings Manager",
 							Description = string.format("Overwrote config %q", configSelection.Value),
 						})
 					end,
@@ -4768,7 +4768,7 @@ function MacLib:Window(Settings)
 					Name = "Refresh Config List",
 					Callback = function()
 						WindowFunctions:Notify({
-							Title = string.rep(" ",3) .. Settings.Title,
+							Title = string.rep(" ",3) .. "Settings Manager",
 							Description = string.format("Refreshed config list"),
 						})
 
@@ -4786,7 +4786,7 @@ function MacLib:Window(Settings)
 							autoloadLabel:UpdateName("Autoload config: " .. name)
 				
 							WindowFunctions:Notify({
-								Title = string.rep(" ",3) .. Settings.Title,
+								Title = string.rep(" ",3) .. "Settings Manager",
 								Description = string.format("Set %q as autoload", name),
 							})
 
@@ -4797,7 +4797,7 @@ function MacLib:Window(Settings)
 							delfile(MacLib.Folder .. "/settings/autoload.txt", name)
 
 							WindowFunctions:Notify({
-								Title = string.rep(" ",3) .. Settings.Title,
+								Title =string.rep(" ",3) .. "Settings Manager",
 								Description = "Please select a valid config to set as autoload.",
 							})
 
