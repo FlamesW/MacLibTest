@@ -4877,7 +4877,7 @@ function MacLib:Window(Settings)
 			Enum.FontStyle.Normal
 		)
 		notificationTitle.RichText = true
-		notificationTitle.Text = Settings.Title
+		notificationTitle.Text = string.rep(" ",3) .. Settings.Title
 		notificationTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 		notificationTitle.TextSize = 15
 		notificationTitle.TextTransparency = 0.2
