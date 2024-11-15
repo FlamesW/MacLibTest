@@ -3896,15 +3896,6 @@ function MacLib:Window(Settings)
 
 					interactions.Parent = prompt
 
-					local iconHeader = Instance.new("ImageLabel")
-					iconHeader.Name = "IconHeader"
-					iconHeader.BackgroundTransparency = 1
-					iconHeader.Size = UDim2.fromOffset(24, 24)
-					iconHeader.Image = getgenv().MainIcon
-					iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
-					iconHeader.ScaleType = Enum.ScaleType.Fit
-					iconHeader.Parent = prompt
-
 					local globalSettingsUIPadding = Instance.new("UIPadding")
 					globalSettingsUIPadding.Name = "GlobalSettingsUIPadding"
 					globalSettingsUIPadding.PaddingBottom = UDim.new(0, 20)
@@ -3921,7 +3912,22 @@ function MacLib:Window(Settings)
 					paragraph.BorderColor3 = Color3.fromRGB(0, 0, 0)
 					paragraph.BorderSizePixel = 0
 					paragraph.Size = UDim2.fromScale(1, 0)
-
+					
+					local layout = Instance.new("UIListLayout")
+					layout.FillDirection = Enum.FillDirection.Horizontal
+					layout.HorizontalAlignment = Enum.HorizontalAlignment.Left
+					layout.VerticalAlignment = Enum.VerticalAlignment.Center
+					layout.Padding = UDim.new(0, 8)
+					layout.Parent = paragraph
+					
+					local iconHeader = Instance.new("ImageLabel")
+					iconHeader.Name = "IconHeader"
+					iconHeader.Image = getgenv().MainIcon
+					iconHeader.BackgroundTransparency = 1
+					iconHeader.Size = Settings.ImgSize
+					iconHeader.Position = UDim2.new(0, 0, 0, 0)
+					iconHeader.Parent = paragraph
+					
 					local paragraphHeader = Instance.new("TextLabel")
 					paragraphHeader.Name = "ParagraphHeader"
 					paragraphHeader.FontFace = Font.new(
@@ -3943,7 +3949,7 @@ function MacLib:Window(Settings)
 					paragraphHeader.BorderSizePixel = 0
 					paragraphHeader.Size = UDim2.fromScale(1, 0)
 					paragraphHeader.Parent = paragraph
-
+					
 					local uIListLayout9 = Instance.new("UIListLayout")
 					uIListLayout9.Name = "UIListLayout"
 					uIListLayout9.Padding = UDim.new(0, 15)
