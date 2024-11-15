@@ -5118,7 +5118,7 @@ function MacLib:Window(Settings)
 			Enum.FontStyle.Normal
 		)
 		paragraphHeader.RichText = true
-		paragraphHeader.Text = string.rep(" ",8) .. Settings.Title		
+		paragraphHeader.Text = Settings.Title	
 		paragraphHeader.TextColor3 = Color3.fromRGB(255, 255, 255)
 		paragraphHeader.TextSize = 21
 		paragraphHeader.TextTransparency = 0.4
