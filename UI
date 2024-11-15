@@ -2,7 +2,7 @@ local MacLib = { Options = {}, Folder = "Maclib" }
 
 --// One At a Time
 if game:GetService("CoreGui"):FindFirstChild("MacLib") then
-    return
+	return
 end
 
 --// Services
@@ -4308,92 +4308,60 @@ function MacLib:Window(Settings)
 					return ColorpickerFunctions
 				end
 
-				function SectionFunctions:Paragraph(Settings, Flag)
-					local ParagraphFunctions = {Settings = Settings}
-				
-					local paragraph = Instance.new("Frame")
-					paragraph.Name = "Paragraph"
-					paragraph.AutomaticSize = Enum.AutomaticSize.Y
-					paragraph.BackgroundColor3 = Color3.fromRGB(0,0,0)
-					paragraph.BackgroundTransparency = 1
-					paragraph.BorderColor3 = Color3.fromRGB(0,0,0)
-					paragraph.BorderSizePixel = 0
-					paragraph.Size = UDim2.new(1,0,0,38)
-					paragraph.Parent = section
-				
-					local iconHeader = Instance.new("ImageLabel")
-					iconHeader.Name = "IconHeader"
-					iconHeader.Image = getgenv().MainIcon
-					iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
-					iconHeader.BackgroundTransparency = 1
-					iconHeader.Size = UDim2.new(0, 20, 0, 20)
-					iconHeader.Position = UDim2.new(0, 0, 0, 0)
-					iconHeader.Parent = paragraph
-				
-					local paragraphHeader = Instance.new("TextLabel")
-					paragraphHeader.Name = "ParagraphHeader"
-					paragraphHeader.FontFace = Font.new(
+				function SectionFunctions:Header(Settings, Flag)
+					local HeaderFunctions = {Settings = Settings}
+
+					local header = Instance.new("Frame")
+					header.Name = "Header"
+					header.AutomaticSize = Enum.AutomaticSize.Y
+					header.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+					header.BackgroundTransparency = 1
+					header.BorderColor3 = Color3.fromRGB(0, 0, 0)
+					header.BorderSizePixel = 0
+					header.LayoutOrder = 0
+					header.Size = UDim2.fromScale(1, 0)
+					header.Parent = section
+
+					local uIPadding = Instance.new("UIPadding")
+					uIPadding.Name = "UIPadding"
+					uIPadding.PaddingBottom = UDim.new(0, 5)
+					uIPadding.Parent = header
+
+					local headerText = Instance.new("TextLabel")
+					headerText.Name = "HeaderText"
+					headerText.FontFace = Font.new(
 						assets.interFont,
 						Enum.FontWeight.Medium,
 						Enum.FontStyle.Normal
 					)
-					paragraphHeader.RichText = true
-					paragraphHeader.Text = ParagraphFunctions.Settings.Header
-					paragraphHeader.TextColor3 = Color3.fromRGB(255,255,255)
-					paragraphHeader.TextSize = 15
-					paragraphHeader.TextTransparency = 0.4
-					paragraphHeader.TextWrapped = true
-					paragraphHeader.TextXAlignment = Enum.TextXAlignment.Left
-					paragraphHeader.AutomaticSize = Enum.AutomaticSize.Y
-					paragraphHeader.BackgroundColor3 = Color3.fromRGB(255,255,255)
-					paragraphHeader.BackgroundTransparency = 1
-					paragraphHeader.BorderColor3 = Color3.fromRGB(0,0,0)
-					paragraphHeader.BorderSizePixel = 0
-					paragraphHeader.Position = UDim2.new(0, 25, 0, 0)
-					paragraphHeader.Size = UDim2.fromScale(1, 0)
-					paragraphHeader.Parent = paragraph
-				
-					local uIListLayout = Instance.new("UIListLayout")
-					uIListLayout.Name = "UIListLayout"
-					uIListLayout.Padding = UDim.new(0,5)
-					uIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-					uIListLayout.Parent = paragraph
-				
-					local paragraphBody = Instance.new("TextLabel")
-					paragraphBody.Name = "ParagraphBody"
-					paragraphBody.FontFace = Font.new(assets.interFont)
-					paragraphBody.RichText = true
-					paragraphBody.Text = ParagraphFunctions.Settings.Body
-					paragraphBody.TextColor3 = Color3.fromRGB(255,255,255)
-					paragraphBody.TextSize = 13
-					paragraphBody.TextTransparency = 0.5
-					paragraphBody.TextWrapped = true
-					paragraphBody.TextXAlignment = Enum.TextXAlignment.Left
-					paragraphBody.AutomaticSize = Enum.AutomaticSize.Y
-					paragraphBody.BackgroundColor3 = Color3.fromRGB(255,255,255)
-					paragraphBody.BackgroundTransparency = 1
-					paragraphBody.BorderColor3 = Color3.fromRGB(0,0,0)
-					paragraphBody.BorderSizePixel = 0
-					paragraphBody.LayoutOrder = 1
-					paragraphBody.Size = UDim2.fromScale(1, 0)
-					paragraphBody.Parent = paragraph
-				
-					function ParagraphFunctions:UpdateHeader(New)
-						paragraphHeader.Text = New
+					headerText.RichText = true
+					headerText.Text = HeaderFunctions.Settings.Text or HeaderFunctions.Settings.Name
+					headerText.TextColor3 = Color3.fromRGB(255, 255, 255)
+					headerText.TextSize = 16
+					headerText.TextTransparency = 0.3
+					headerText.TextWrapped = true
+					headerText.TextXAlignment = Enum.TextXAlignment.Left
+					headerText.AutomaticSize = Enum.AutomaticSize.Y
+					headerText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					headerText.BackgroundTransparency = 1
+					headerText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+					headerText.BorderSizePixel = 0
+					headerText.Size = UDim2.fromScale(1, 0)
+					headerText.Parent = header
+
+					function HeaderFunctions:UpdateName(New)
+						headerText.Text = New
 					end
-					function ParagraphFunctions:UpdateBody(New)
-						paragraphBody.Text = New
+					function HeaderFunctions:SetVisibility(State)
+						header.Visible = State
 					end
-					function ParagraphFunctions:SetVisibility(State)
-						paragraph.Visible = State
-					end
-				
+
 					if Flag then
-						MacLib.Options[Flag] = ParagraphFunctions
+						MacLib.Options[Flag] = HeaderFunctions
 					end
-					return ParagraphFunctions
+					return HeaderFunctions
 				end
-				
+
 				function SectionFunctions:Label(Settings, Flag)
 					local LabelFunctions = {Settings = Settings}
 
