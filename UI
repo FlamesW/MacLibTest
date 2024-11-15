@@ -5115,7 +5115,7 @@ function MacLib:Window(Settings)
 		iconHeader.Image = getgenv().MainIcon
 		iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
 		iconHeader.BackgroundTransparency = 1
-		iconHeader.Size = Settings.ImgSize
+		iconHeader.Size = UDim2.fromOffset(27, 27)
 		iconHeader.Position = UDim2.new(0, 5, 0, 7)
 		iconHeader.AnchorPoint = Vector2.new(0, 0)
 		iconHeader.Parent = paragraph
