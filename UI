@@ -3896,6 +3896,15 @@ function MacLib:Window(Settings)
 
 					interactions.Parent = prompt
 
+					local iconHeader = Instance.new("ImageLabel")
+					iconHeader.Name = "IconHeader"
+					iconHeader.BackgroundTransparency = 1
+					iconHeader.Size = UDim2.fromOffset(24, 24)
+					iconHeader.Image = getgenv().MainIcon
+					iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
+					iconHeader.ScaleType = Enum.ScaleType.Fit
+					iconHeader.Parent = prompt
+
 					local globalSettingsUIPadding = Instance.new("UIPadding")
 					globalSettingsUIPadding.Name = "GlobalSettingsUIPadding"
 					globalSettingsUIPadding.PaddingBottom = UDim.new(0, 20)
@@ -3912,15 +3921,6 @@ function MacLib:Window(Settings)
 					paragraph.BorderColor3 = Color3.fromRGB(0, 0, 0)
 					paragraph.BorderSizePixel = 0
 					paragraph.Size = UDim2.fromScale(1, 0)
-
-					local iconHeader = Instance.new("ImageLabel")
-					iconHeader.Name = "IconHeader"
-					iconHeader.BackgroundTransparency = 1
-					iconHeader.Size = UDim2.fromOffset(24, 24)
-					iconHeader.Image = getgenv().MainIcon
-					iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
-					iconHeader.ScaleType = Enum.ScaleType.Fit
-					iconHeader.Parent = paragraph
 
 					local paragraphHeader = Instance.new("TextLabel")
 					paragraphHeader.Name = "ParagraphHeader"
