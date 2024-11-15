@@ -3913,6 +3913,15 @@ function MacLib:Window(Settings)
 					paragraph.BorderSizePixel = 0
 					paragraph.Size = UDim2.fromScale(1, 0)
 
+					local iconHeader = Instance.new("ImageLabel")
+					iconHeader.Name = "IconHeader"
+					iconHeader.BackgroundTransparency = 1
+					iconHeader.Size = UDim2.fromOffset(24, 24)
+					iconHeader.Image = getgenv().MainIcon
+					iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
+					iconHeader.ScaleType = Enum.ScaleType.Fit
+					iconHeader.Parent = paragraph
+
 					local paragraphHeader = Instance.new("TextLabel")
 					paragraphHeader.Name = "ParagraphHeader"
 					paragraphHeader.FontFace = Font.new(
@@ -5052,7 +5061,7 @@ function MacLib:Window(Settings)
 		dialogCanvas.Size = UDim2.fromScale(1, 1)
 		dialogCanvas.GroupTransparency = 1
 		dialogCanvas.Parent = base
-	
+
 		local dialog = Instance.new("Frame")
 		dialog.Name = "Dialog"
 		dialog.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -5060,12 +5069,12 @@ function MacLib:Window(Settings)
 		dialog.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		dialog.BorderSizePixel = 0
 		dialog.Size = UDim2.fromScale(1, 1)
-	
+
 		local dialogUICorner = Instance.new("UICorner")
 		dialogUICorner.Name = "BaseUICorner"
 		dialogUICorner.CornerRadius = UDim.new(0, 10)
 		dialogUICorner.Parent = dialog
-	
+
 		local prompt = Instance.new("Frame")
 		prompt.Name = "Prompt"
 		prompt.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -5075,24 +5084,24 @@ function MacLib:Window(Settings)
 		prompt.BorderSizePixel = 0
 		prompt.Position = UDim2.fromScale(0.5, 0.5)
 		prompt.Size = UDim2.fromOffset(280, 0)
-	
+
 		local promptUIScale = Instance.new("UIScale")
 		promptUIScale.Name = "BaseUIScale"
 		promptUIScale.Parent = prompt
 		promptUIScale.Scale = 0.95
-	
+
 		local globalSettingsUIStroke = Instance.new("UIStroke")
 		globalSettingsUIStroke.Name = "GlobalSettingsUIStroke"
 		globalSettingsUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 		globalSettingsUIStroke.Color = Color3.fromRGB(255, 255, 255)
 		globalSettingsUIStroke.Transparency = 0.9
 		globalSettingsUIStroke.Parent = prompt
-	
+
 		local globalSettingsUICorner = Instance.new("UICorner")
 		globalSettingsUICorner.Name = "GlobalSettingsUICorner"
 		globalSettingsUICorner.CornerRadius = UDim.new(0, 10)
 		globalSettingsUICorner.Parent = prompt
-	
+
 		local globalSettingsUIPadding = Instance.new("UIPadding")
 		globalSettingsUIPadding.Name = "GlobalSettingsUIPadding"
 		globalSettingsUIPadding.PaddingBottom = UDim.new(0, 20)
@@ -5100,16 +5109,7 @@ function MacLib:Window(Settings)
 		globalSettingsUIPadding.PaddingRight = UDim.new(0, 20)
 		globalSettingsUIPadding.PaddingTop = UDim.new(0, 20)
 		globalSettingsUIPadding.Parent = prompt
-	
-		local iconHeader = Instance.new("ImageLabel")
-		iconHeader.Name = "IconHeader"
-		iconHeader.BackgroundTransparency = 1
-		iconHeader.Size = UDim2.fromOffset(24, 24)
-		iconHeader.Image = getgenv().MainIcon
-		iconHeader.ImageColor3 = Color3.fromRGB(255, 255, 255)
-		iconHeader.ScaleType = Enum.ScaleType.Fit
-		iconHeader.Parent = prompt
-	
+
 		local paragraph = Instance.new("Frame")
 		paragraph.Name = "Paragraph"
 		paragraph.AutomaticSize = Enum.AutomaticSize.Y
@@ -5118,16 +5118,7 @@ function MacLib:Window(Settings)
 		paragraph.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		paragraph.BorderSizePixel = 0
 		paragraph.Size = UDim2.new(1, 0, 0, 38)
-	
-		local titleLayout = Instance.new("UIListLayout")
-		titleLayout.Name = "TitleLayout"
-		titleLayout.Padding = UDim.new(0, 10)
-		titleLayout.FillDirection = Enum.FillDirection.Horizontal
-		titleLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
-		titleLayout.VerticalAlignment = Enum.VerticalAlignment.Center
-		titleLayout.SortOrder = Enum.SortOrder.LayoutOrder
-		titleLayout.Parent = prompt
-	
+
 		local paragraphHeader = Instance.new("TextLabel")
 		paragraphHeader.Name = "ParagraphHeader"
 		paragraphHeader.FontFace = Font.new(
