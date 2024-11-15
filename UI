@@ -4891,6 +4891,16 @@ function MacLib:Window(Settings)
 		notificationTitle.BorderSizePixel = 0
 		notificationTitle.Size = UDim2.new(1, -12, 0, 0)
 
+		local notificationIcon = Instance.new("ImageLabel")
+		notificationIcon.Name = "NotificationIcon"
+		notificationIcon.Image = getgenv().MainIcon
+		notificationIcon.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		notificationIcon.BackgroundTransparency = 1
+		notificationIcon.Size = UDim2.fromOffset(27, 27)
+		notificationIcon.Position = UDim2.new(0, 10, 0, 1)
+		notificationIcon.AnchorPoint = Vector2.new(0, 0)
+		notificationIcon.Parent = notificationTitle
+
 		local notificationTitleUIPadding = Instance.new("UIPadding")
 		notificationTitleUIPadding.Name = "NotificationTitleUIPadding"
 		notificationTitleUIPadding.PaddingRight = UDim.new(0, 25)
