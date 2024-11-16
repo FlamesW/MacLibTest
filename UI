@@ -2018,12 +2018,7 @@ function MacLib:Window(Settings)
 						SliderFunctions.Value = finalValue
 					end
 
-                    if Flag then
-                        MacLib.Options[Flag] = SliderFunctions
-                        if MacLib.Options[Flag] and MacLib.Options[Flag].Settings.Default then
-                            SetValue(MacLib.Options[Flag].Settings.Default, true)
-                        end
-                    end
+					SetValue(SliderFunctions.Settings.Default, true)
 
 					sliderHead.InputBegan:Connect(function(input)
 						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
@@ -2091,9 +2086,13 @@ function MacLib:Window(Settings)
 					function SliderFunctions:SetVisibility(State)
 						slider.Visible = State
 					end
-					function SliderFunctions:UpdateValue(Value)
-						SetValue(tonumber(Value), true)
-					end
+                    function SliderFunctions:UpdateValue(Value)
+                        SetValue(tonumber(Value), true)
+                        
+                        if SliderFunctions.Settings.Callback then
+                            SliderFunctions.Settings.Callback(tonumber(Value))
+                        end
+                    end
 					function SliderFunctions:GetValue()
 						return finalValue
 					end
@@ -5467,19 +5466,19 @@ function MacLib:Window(Settings)
                 end
             end
 		},
-        ["Slider"] = {
-            Save = function(Flag, data)
-                return {
-                    type = "Slider", 
-                    flag = Flag, 
-                    value = (data.Value and tostring(data.Value)) or false
-                }
-            end,
-            Load = function(Flag, data)
-                if MacLib.Options[Flag] and data.value then
+		["Slider"] = {
+			Save = function(Flag, data)
+				return {
+					type = "Slider", 
+					flag = Flag, 
+					value = (data.Value and tostring(data.Value)) or false
+				}
+			end,
+			Load = function(Flag, data)
+				if MacLib.Options[Flag] and data.value then
                     MacLib.Options[Flag]:UpdateValue(tonumber(data.value))
-                end
-            end
+				end
+			end
 		},
 		["Input"] = {
 			Save = function(Flag, data)
