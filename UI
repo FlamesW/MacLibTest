@@ -2018,7 +2018,12 @@ function MacLib:Window(Settings)
 						SliderFunctions.Value = finalValue
 					end
 
-					SetValue(SliderFunctions.Settings.Default, true)
+                    if Flag then
+                        MacLib.Options[Flag] = SliderFunctions
+                        if MacLib.Options[Flag] and MacLib.Options[Flag].Settings.Default then
+                            SetValue(MacLib.Options[Flag].Settings.Default, true)
+                        end
+                    end
 
 					sliderHead.InputBegan:Connect(function(input)
 						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
@@ -5462,19 +5467,19 @@ function MacLib:Window(Settings)
                 end
             end
 		},
-		["Slider"] = {
-			Save = function(Flag, data)
-				return {
-					type = "Slider", 
-					flag = Flag, 
-					value = (data.Value and tostring(data.Value)) or false
-				}
-			end,
-			Load = function(Flag, data)
-				if MacLib.Options[Flag] and data.value then
-					MacLib.Options[Flag]:UpdateValue(data.value)
-				end
-			end
+        ["Slider"] = {
+            Save = function(Flag, data)
+                return {
+                    type = "Slider", 
+                    flag = Flag, 
+                    value = (data.Value and tostring(data.Value)) or false
+                }
+            end,
+            Load = function(Flag, data)
+                if MacLib.Options[Flag] and data.value then
+                    MacLib.Options[Flag]:UpdateValue(tonumber(data.value))
+                end
+            end
 		},
 		["Input"] = {
 			Save = function(Flag, data)
