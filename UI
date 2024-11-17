@@ -4657,6 +4657,10 @@ function MacLib:Window(Settings)
 				local inputPath = nil
 				local selectedConfig = nil
 
+				configSection:Header({Text = "Settings"})
+
+				configSection:Divider()
+
 				configSection:Input({
 					Name = "Config Name",
 					Placeholder = "Name",
