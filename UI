@@ -5339,6 +5339,117 @@ function MacLib:Window(Settings)
 		return notifications.Visible
 	end
 
+	function Window:SetModeratorDetectionState(state)
+		getgenv().ModeratorDetection = state;
+		local AdminRoles = {"mod","admin","staff","dev","founder","owner","supervis","manager","management","executive","president","chairman","chairwoman","chairperson","director","creator"};
+		if state then
+			task.spawn(function()
+				while getgenv().ModeratorDetection == true do
+					pcall(function()
+						for _,v in ipairs(game.Players:GetPlayers()) do
+							for _,x in pairs(AdminRoles) do
+								local Role = v:GetRoleInGroup(game.CreatorId);
+								if string.find(string.lower(Role),x) then
+									game.Players.LocalPlayer:Kick("Kicked you because a " ..Role.. " joined your game!");
+								end
+							end
+						end
+					end)
+					task.wait(1.5);
+				end
+			end)
+		end
+	end
+	
+	function Window:GetModeratorDetectionState()
+		return getgenv().ModeratorDetection;
+	end
+	
+	function Window:SetSnitchDetectionState(state)
+		getgenv().SnitchDetection = state;
+		local ForbiddenWords = {"mod","admin","staff","dev","founder","owner","supervis","manager","management","executive","president","chairman","chairwoman","chairperson","director","hack","exploit","script","report","cheat","executor","skid","owner","creator","admin","staff","anti","ban"};
+		if state then
+			task.spawn(function()
+				local Connections = {};
+				game:GetService("Players").PlayerAdded:Connect(function(v)
+					Connections[v] = v.Chatted:Connect(function(Msg)
+						if getgenv().SnitchDetection then
+							local LowerMsg = Msg:lower();
+							for _,Wrd in ipairs(ForbiddenWords) do
+								if string.find(LowerMsg, Wrd:lower(),1,true) then
+									game.Players.LocalPlayer:Kick('Someone said: "' ..LowerMsg.. '"');
+									break;
+								end
+							end
+						end
+					end)
+				end)
+	
+				for _,v in ipairs(game:GetService("Players"):GetPlayers()) do
+					if not Connections[v] then
+						Connections[v] = v.Chatted:Connect(function(Msg)
+							if getgenv().SnitchDetection then
+								local LowerMsg = Msg:lower();
+								for _,Wrd in ipairs(ForbiddenWords) do
+									if string.find(LowerMsg,Wrd:lower(),1,true) then
+										game.Players.LocalPlayer:Kick('Someone said: "' ..LowerMsg.. '"');
+										break;
+									end
+								end
+							end
+						end)
+					end
+				end
+			end)
+		else
+			for _,v in ipairs(game:GetService("Players"):GetPlayers()) do
+				if Connections[v] then
+					Connections[v]:Disconnect();
+					Connections[v] = nil;
+				end
+			end
+		end
+	end
+	
+	function Window:GetSnitchDetectionState()
+		return getgenv().SnitchDetection;
+	end
+	
+	function Window:SetStreamingModeState(state)
+		getgenv().UsernameHider = state;
+		if state then
+			task.spawn(function()
+				local function UpdVisibility(Val)
+					if string.find(Val.Text,game.Players.LocalPlayer.Name) or string.find(Val.Text,game.Players.LocalPlayer.DisplayName) then
+						Val.Visible = not getgenv().UsernameHider;
+					end
+				end
+	
+				for _,Val in ipairs(game:GetDescendants()) do
+					if Val.ClassName == "TextLabel" then
+						UpdVisibility(Val);
+						Val:GetPropertyChangedSignal("Text"):Connect(function()
+							UpdVisibility(Val);
+						end)
+					end
+				end
+	
+				game.DescendantAdded:Connect(function(Val)
+					if Val.ClassName == "TextLabel" then
+						UpdVisibility(Val);
+						Val:GetPropertyChangedSignal("Text"):Connect(function()
+							UpdVisibility(Val);
+						end)
+					end
+				end)
+			end)
+		end
+	end
+	
+	function Window:GetStreamingModeState()
+		return getgenv().UsernameHider;
+	end
+
 	function WindowFunctions:SetState(State)
 		windowState = State
 		base.Visible = State
