@@ -5368,7 +5368,7 @@ function MacLib:Window(Settings)
 		local state = not WindowFunctions:GetState()
 		WindowFunctions:SetState(state)
 		WindowFunctions:Notify({
-			Title =  string.rep(" ",3) .. "Settings Manager",,
+			Title =  string.rep(" ",3) .. "Settings Manager",
 			Description = (state and "Maximized " or "Minimized ") .. "the menu. Use " .. tostring(MenuKeybind.Name) .. " to toggle it.",
 			Lifetime = 5
 		})
@@ -5582,13 +5582,13 @@ function MacLib:Window(Settings)
 			local suc, err = MacLib:LoadConfig(name)
 			if not suc then
 				WindowFunctions:Notify({
-					Title =  string.rep(" ",3) .. "Settings Manager",,
+					Title =  string.rep(" ",3) .. "Settings Manager",
 					Description = "Error loading autoload config: " .. err
 				})
 			end
 
 			WindowFunctions:Notify({
-				Title =  string.rep(" ",3) .. "Settings Manager",,
+				Title =  string.rep(" ",3) .. "Settings Manager",
 				Description = string.format("Autoloaded config: %q", name),
 			})
 		end
