@@ -5370,7 +5370,7 @@ function MacLib:Window(Settings)
 		WindowFunctions:Notify({
 			Title =  string.rep(" ",3) .. "Settings Manager",
 			Description = (state and "Maximized " or "Minimized ") .. "the menu. Use " .. tostring(MenuKeybind.Name) .. " to toggle it.",
-			Lifetime = 5
+			Lifetime = 1.5
 		})
 	end
 
