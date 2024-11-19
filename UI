@@ -1,10 +1,5 @@
 local MacLib = { Options = {}, Folder = "Maclib" }
 
---// One At a Time
-if game:GetService("CoreGui"):FindFirstChild("MacLib") then
-	return
-end
-
 --// Services
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -5732,5 +5727,40 @@ function MacLib:Window(Settings)
 	return WindowFunctions
 end
 
+-- // Taken from Sirius source 💞
+local function format(Int)
+    return string.format("%02i", Int)
+end
+
+local function convertToHMS(Seconds)
+    local Minutes = (Seconds - Seconds % 60) / 60
+    Seconds = Seconds - Minutes * 60
+    local Hours = (Minutes - Minutes % 60) / 60
+    Minutes = Minutes - Hours * 60
+    return format(Hours) .. ":" .. format(Minutes) .. ":" .. format(Seconds)
+end
+
+task.spawn(function()
+    if not getgenv().ExecutedInfoStats == true then getgenv().ExecutedInfoStats = true;
+        while true do
+			pcall(function()
+				local CurrentDate = os.date("%b %d, %Y");
+				local Ping = string.format("%.2f ms", game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue());
+				local Time = os.date("%H:%M");
+	
+				for _,v in ipairs(game:GetService("CoreGui"):GetChildren()) do
+					if v.Name == "MacLib" then
+						local PathDisplay = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("DisplayName");
+						local PathUsername = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("Username");
+						local HeadShot = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup:FindFirstChild("Headshot");
+	
+						PathDisplay.Text = Ping .. " | " .. CurrentDate .. " | " .. Time;PathDisplay.TextSize = 11;PathUsername.Text = "RunTime: " .. convertToHMS(time());HeadShot.Visible = false;
+					end
+				end
+			end)
+            task.wait(1);
+        end
+    end
+end)
 
 return MacLib
