@@ -1321,11 +1321,11 @@ function MacLib:Window(Settings)
 		local toggled = Settings.Default
 		Toggle(toggled)
 
-               pcall(function()
-		if Settings.Callback then
-		    Settings.Callback(toggled)
-		end
-               end)
+		task.spawn(function()
+			if Settings.Callback then
+				Settings.Callback(toggled)
+			end
+		end)
 		
 		globalSetting.MouseButton1Click:Connect(function()
 			toggled = not toggled
@@ -2084,9 +2084,11 @@ function MacLib:Window(Settings)
                     function SliderFunctions:UpdateValue(Value)
                         SetValue(tonumber(Value), true)
                         
-                        if SliderFunctions.Settings.Callback then
-                            SliderFunctions.Settings.Callback(tonumber(Value))
-                        end
+						task.spawn(function()
+							if SliderFunctions.Settings.Callback then
+								SliderFunctions.Settings.Callback(tonumber(Value))
+							end
+						end)
                     end
 					function SliderFunctions:GetValue()
 						return finalValue
