@@ -1320,10 +1320,12 @@ function MacLib:Window(Settings)
 		
 		local toggled = Settings.Default
 		Toggle(toggled)
-		
+
+               pcall(function()
 		if Settings.Callback then
-			Settings.Callback(toggled)
+		    Settings.Callback(toggled)
 		end
+               end)
 		
 		globalSetting.MouseButton1Click:Connect(function()
 			toggled = not toggled
