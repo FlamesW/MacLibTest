@@ -1,5 +1,10 @@
 local MacLib = { Options = {}, Folder = "Maclib" }
 
+--// One At a Time
+if game:GetService("CoreGui"):FindFirstChild("MacLib") then
+    return
+end
+
 --// Services
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -87,11 +92,13 @@ function MacLib:Window(Settings)
 	notificationsUIPadding.PaddingTop = UDim.new(0, 10)
 	notificationsUIPadding.Parent = notifications
 
+	local theme = getgenv().Settings["Interface"]["CustomThemeUI"]
+
 	local base = Instance.new("Frame")
 	base.Name = "Base"
 	base.AnchorPoint = Vector2.new(0.5, 0.5)
-	base.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-	base.BackgroundTransparency = Settings.AcrylicBlur and 0.05 or 0
+	base.BackgroundColor3 = Color3.fromRGB(theme[1] or 0, theme[2] or 0, theme[3] or 0)
+	base.BackgroundTransparency = Settings.AcrylicBlur and 0.15 or 0
 	base.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	base.BorderSizePixel = 0
 	base.Position = UDim2.fromScale(0.5, 0.5)
@@ -192,7 +199,7 @@ function MacLib:Window(Settings)
 	local exit = Instance.new("TextButton")
 	exit.Name = "Exit"
 	exit.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
-	exit.Text = getgenv().CustomPath
+	exit.Text = ""
 	exit.TextColor3 = Color3.fromRGB(225, 225, 225)
 	exit.TextSize = 14
 	exit.AutoButtonColor = false
@@ -891,10 +898,12 @@ function MacLib:Window(Settings)
 
 	content.Parent = base
 
+	local theme = getgenv().Settings["Interface"]["CustomThemeUI"]
+
 	local globalSettings = Instance.new("Frame")
 	globalSettings.Name = "GlobalSettings"
 	globalSettings.AutomaticSize = Enum.AutomaticSize.XY
-	globalSettings.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+	globalSettings.BackgroundColor3 = Color3.fromRGB(theme[1] or 0, theme[2] or 0, theme[3] or 0)
 	globalSettings.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	globalSettings.BorderSizePixel = 0
 	globalSettings.Position = UDim2.fromScale(0.298, 0.104)
@@ -1320,7 +1329,7 @@ function MacLib:Window(Settings)
 		
 		local toggled = Settings.Default
 		Toggle(toggled)
-
+		
 		task.spawn(function()
 			if Settings.Callback then
 				Settings.Callback(toggled)
@@ -1647,7 +1656,7 @@ function MacLib:Window(Settings)
 					buttonImage.BorderColor3 = Color3.fromRGB(0, 0, 0)
 					buttonImage.BorderSizePixel = 0
 					buttonImage.Position = UDim2.fromScale(1, 0.5)
-					buttonImage.Size = UDim2.fromOffset(15, 15)
+					buttonImage.Size = UDim2.fromOffset(18, 18)
 					buttonImage.Parent = button
 
 					local TweenSettings = {
@@ -1800,9 +1809,11 @@ function MacLib:Window(Settings)
 					local function Toggle()
 						togglebool = not togglebool
 						ToggleState(togglebool)
-						if ToggleFunctions.Settings.Callback then
-							ToggleFunctions.Settings.Callback(togglebool)
-						end
+						task.spawn(function()
+							if ToggleFunctions.Settings.Callback then
+								ToggleFunctions.Settings.Callback(togglebool);
+							end
+						end)
 					end
 				
 					toggle1.MouseButton1Click:Connect(Toggle)
@@ -1813,9 +1824,11 @@ function MacLib:Window(Settings)
 					function ToggleFunctions:UpdateState(State)
                         togglebool = State;
                         ToggleState(togglebool);
-                        if ToggleFunctions.Settings.Callback then
-                            ToggleFunctions.Settings.Callback(togglebool); -- Trigger Callback
-                        end
+						task.spawn(function()
+							if ToggleFunctions.Settings.Callback then
+								ToggleFunctions.Settings.Callback(togglebool);
+							end
+						end)
 					end
 					function ToggleFunctions:GetState()
 						return togglebool
@@ -2083,8 +2096,7 @@ function MacLib:Window(Settings)
 					end
                     function SliderFunctions:UpdateValue(Value)
                         SetValue(tonumber(Value), true)
-                        
-						task.spawn(function()
+                        task.spawn(function()
 							if SliderFunctions.Settings.Callback then
 								SliderFunctions.Settings.Callback(tonumber(Value))
 							end
@@ -3128,11 +3140,13 @@ function MacLib:Window(Settings)
 					baseUICorner.CornerRadius = UDim.new(0, 10)
 					baseUICorner.Parent = colorPicker
 
+					local theme = getgenv().Settings["Interface"]["CustomThemeUI"]
+
 					local prompt = Instance.new("Frame")
 					prompt.Name = "Prompt"
 					prompt.AnchorPoint = Vector2.new(0.5, 0.5)
 					prompt.AutomaticSize = Enum.AutomaticSize.Y
-					prompt.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+					prompt.BackgroundColor3 = Color3.fromRGB(theme[1] or 0, theme[2] or 0, theme[3] or 0)
 					prompt.BorderColor3 = Color3.fromRGB(0, 0, 0)
 					prompt.BorderSizePixel = 0
 					prompt.Position = UDim2.fromScale(0.5, 0.5)
@@ -3839,7 +3853,7 @@ function MacLib:Window(Settings)
 					confirm.TextTruncate = Enum.TextTruncate.AtEnd
 					confirm.AutoButtonColor = false
 					confirm.AutomaticSize = Enum.AutomaticSize.Y
-					confirm.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+					confirm.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
 					confirm.BorderColor3 = Color3.fromRGB(0, 0, 0)
 					confirm.BorderSizePixel = 0
 					confirm.Size = UDim2.fromScale(1, 0)
@@ -3873,7 +3887,7 @@ function MacLib:Window(Settings)
 					cancel.TextTruncate = Enum.TextTruncate.AtEnd
 					cancel.AutoButtonColor = false
 					cancel.AutomaticSize = Enum.AutomaticSize.Y
-					cancel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+					cancel.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
 					cancel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 					cancel.BorderSizePixel = 0
 					cancel.Size = UDim2.fromScale(1, 0)
@@ -4839,11 +4853,13 @@ function MacLib:Window(Settings)
 	function WindowFunctions:Notify(Settings)
 		local NotificationFunctions = {}
 
+		local theme = getgenv().Settings["Interface"]["CustomThemeUI"]
+
 		local notification = Instance.new("Frame")
 		notification.Name = "Notification"
 		notification.AnchorPoint = Vector2.new(0.5, 0.5)
 		notification.AutomaticSize = Enum.AutomaticSize.Y
-		notification.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+		notification.BackgroundColor3 = Color3.fromRGB(theme[1] or 0, theme[2] or 0, theme[3] or 0)
 		notification.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		notification.BorderSizePixel = 0
 		notification.Position = UDim2.fromScale(0.5, 0.5)
@@ -5084,11 +5100,13 @@ function MacLib:Window(Settings)
 		dialogUICorner.CornerRadius = UDim.new(0, 10)
 		dialogUICorner.Parent = dialog
 
+		local theme = getgenv().Settings["Interface"]["CustomThemeUI"]
+
 		local prompt = Instance.new("Frame")
 		prompt.Name = "Prompt"
 		prompt.AnchorPoint = Vector2.new(0.5, 0.5)
 		prompt.AutomaticSize = Enum.AutomaticSize.Y
-		prompt.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+		prompt.BackgroundColor3 = Color3.fromRGB(theme[1] or 0, theme[2] or 0, theme[3] or 0)
 		prompt.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		prompt.BorderSizePixel = 0
 		prompt.Position = UDim2.fromScale(0.5, 0.5)
@@ -5250,7 +5268,7 @@ function MacLib:Window(Settings)
 			button.TextTruncate = Enum.TextTruncate.AtEnd
 			button.AutoButtonColor = false
 			button.AutomaticSize = Enum.AutomaticSize.Y
-			button.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			button.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
 			button.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			button.BorderSizePixel = 0
 			button.Size = UDim2.fromScale(1, 0)
@@ -5403,7 +5421,7 @@ function MacLib:Window(Settings)
 
 	function WindowFunctions:SetAcrylicBlurState(State)
 		acrylicBlur = State
-		base.BackgroundTransparency = State and 0.05 or 0
+		base.BackgroundTransparency = State and 0.15 or 0
 	end
 
 	function WindowFunctions:GetAcrylicBlurState()
@@ -5741,21 +5759,21 @@ end
 task.spawn(function()
     if not getgenv().ExecutedInfoStats == true then getgenv().ExecutedInfoStats = true;
         while true do
-			pcall(function()
-				local CurrentDate = os.date("%b %d, %Y");
-				local Ping = string.format("%.2f ms", game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue());
-				local Time = os.date("%H:%M");
+		pcall(function()
+			local CurrentDate = os.date("%b %d, %Y");
+			local Ping = string.format("%.2f ms", game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue());
+			local Time = os.date("%H:%M");
 	
-				for _,v in ipairs(game:GetService("CoreGui"):GetChildren()) do
-					if v.Name == "MacLib" then
-						local PathDisplay = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("DisplayName");
-						local PathUsername = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("Username");
-						local HeadShot = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup:FindFirstChild("Headshot");
+			for _,v in ipairs(game:GetService("CoreGui"):GetChildren()) do
+			if v.Name == "MacLib" then
+			     local PathDisplay = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("DisplayName");
+			     local PathUsername = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("Username");
+			     local HeadShot = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup:FindFirstChild("Headshot");
 	
-						PathDisplay.Text = Ping .. " | " .. CurrentDate .. " | " .. Time;PathDisplay.TextSize = 11;PathUsername.Text = "RunTime: " .. convertToHMS(time());HeadShot.Visible = false;
-					end
-				end
-			end)
+			    PathDisplay.Text = Ping .. " | " .. CurrentDate .. " | " .. Time;PathDisplay.TextSize = 11;PathUsername.Text = "RunTime: " .. convertToHMS(time());HeadShot.Visible = false;
+			end
+		    end
+		end)
             task.wait(1);
         end
     end
