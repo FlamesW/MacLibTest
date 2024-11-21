@@ -20,6 +20,21 @@ ChangelogsSection1:Paragraph({Header = "Flameware 1.01 [Sakura Stand]",Body = "*
 ChangelogsSection1:SubLabel({Text = "- Script released!"});
 
 ChangelogsSection1:Label({Text = "This the beginning of our journey!"});
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ChangelogsSection1:Paragraph({Header = "Flameware 1.02 [Settings]",Body = "* The following changes:"});
+
+ChangelogsSection1:SubLabel({Text = "- Added custom theme colors!~"});
+
+ChangelogsSection1:SubLabel({Text = "- Mobiles devices get 50% less scale now."});
+
+ChangelogsSection1:SubLabel({Text = "- Theme is now black and Blur set higher."});
+
+ChangelogsSection1:SubLabel({Text = "- Improved Mod Detections, Now it detects teams aswell."});
+
+ChangelogsSection1:SubLabel({Text = "- Improved Snitch Detections"});
+
+ChangelogsSection1:Label({Text = "It takes some time for the update to occur~"});
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Supported Games
