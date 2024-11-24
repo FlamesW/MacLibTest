@@ -1805,6 +1805,10 @@ function MacLib:Window(Settings)
 				
 					local togglebool = ToggleFunctions.Settings.Default or false
 					ToggleState(togglebool)
+
+                    if togglebool and ToggleFunctions.Settings.Callback then
+                        ToggleFunctions.Settings.Callback(togglebool);
+                    end
 				
 					local function Toggle()
 						togglebool = not togglebool
