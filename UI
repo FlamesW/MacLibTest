@@ -5763,7 +5763,7 @@ end
 
 task.spawn(function()
     if not getgenv().ExecutedInfoStats == true then getgenv().ExecutedInfoStats = true;
-        task.spawm(function()
+        task.spawn(function()
             while true do
                 pcall(function()
                     local CurrentDate = os.date("%b %d, %Y");
