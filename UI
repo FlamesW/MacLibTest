@@ -341,7 +341,7 @@ function MacLib:Window(Settings)
 	local globalSettingsButton = Instance.new("ImageButton")
 	globalSettingsButton.Name = "GlobalSettingsButton"
 	globalSettingsButton.Image = assets.globe
-	globalSettingsButton.ImageTransparency = 0.5
+	globalSettingsButton.ImageTransparency = 0
 	globalSettingsButton.AnchorPoint = Vector2.new(1, 0.5)
 	globalSettingsButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	globalSettingsButton.BackgroundTransparency = 1
@@ -416,7 +416,7 @@ function MacLib:Window(Settings)
     icon.ImageColor3 = Color3.fromRGB(255, 255, 255)
     icon.BackgroundTransparency = 1
     icon.Size = Settings.ImgSize
-    icon.Position = UDim2.new(-0.100000006, 0, 0, 7) -- Idk why it doesnt work...
+    icon.Position = UDim2.new(-0.100000006, 0, 0, 8)
     icon.AnchorPoint = Vector2.new(0, 0.5)
     icon.Parent = title
 
@@ -433,6 +433,7 @@ function MacLib:Window(Settings)
 	subtitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 	subtitle.TextSize = 10
 	subtitle.TextTransparency = 0.7
+    subtitle.Visible = false
 	subtitle.TextTruncate = Enum.TextTruncate.SplitWord
 	subtitle.TextXAlignment = Enum.TextXAlignment.Left
 	subtitle.TextYAlignment = Enum.TextYAlignment.Top
@@ -877,8 +878,8 @@ function MacLib:Window(Settings)
 	currentTab.Text = ""
 	currentTab.RichText = true
 	currentTab.TextColor3 = Color3.fromRGB(255, 255, 255)
-	currentTab.TextSize = 15
-	currentTab.TextTransparency = 0.5
+	currentTab.TextSize = 20
+	currentTab.TextTransparency = 0
 	currentTab.TextTruncate = Enum.TextTruncate.SplitWord
 	currentTab.TextXAlignment = Enum.TextXAlignment.Left
 	currentTab.TextYAlignment = Enum.TextYAlignment.Top
@@ -1780,29 +1781,37 @@ function MacLib:Window(Settings)
 					togglerHead.Parent = toggle1
 					
 					toggle1.Parent = toggle
-				
+
+					local toggle1Transparency = {Enabled = 0, Disabled = 0.5}
+					local togglerHeadTransparency = {Enabled = 0, Disabled = 0.85}
+
 					local TweenSettings = {
 						Info = TweenInfo.new(0.2, Enum.EasingStyle.Sine),
+
 						EnabledPosition = UDim2.new(1, 0, 0.5, 0),
 						DisabledPosition = UDim2.new(0.5, 0, 0.5, 0),
 					}
-				
-					local Geen = Color3.fromRGB(30, 121, 30)
-					local Reb = Color3.fromRGB(192, 46, 46)
-					
+
 					local function ToggleState(State)
+						local transparencyValues = State and {toggle1Transparency.Enabled, togglerHeadTransparency.Enabled}
+							or {toggle1Transparency.Disabled, togglerHeadTransparency.Disabled}
 						local position = State and TweenSettings.EnabledPosition or TweenSettings.DisabledPosition
-						local color = State and Geen or Reb
-				
+
+						Tween(toggle1, TweenSettings.Info, {
+							ImageTransparency = transparencyValues[1]
+						}):Play()
+
+						Tween(togglerHead, TweenSettings.Info, {
+							ImageTransparency = transparencyValues[2]
+						}):Play()
+
 						Tween(togglerHead, TweenSettings.Info, {
 							Position = position
 						}):Play()
-				
-						togglerHead.ImageColor3 = color
-				
+
 						ToggleFunctions.State = State
 					end
-				
+
 					local togglebool = ToggleFunctions.Settings.Default or false
 					ToggleState(togglebool)
 
@@ -5763,42 +5772,25 @@ end
 
 task.spawn(function()
     if not getgenv().ExecutedInfoStats == true then getgenv().ExecutedInfoStats = true;
-        task.spawn(function()
-            while true do
-                pcall(function()
-                    local CurrentDate = os.date("%b %d, %Y");
-                    local Ping = string.format("%.2f ms", game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue());
-                    local Time = os.date("%H:%M");
+        while true do task.wait(0.015);
+            pcall(function()
+                local CurrentDate = os.date("%b %d, %Y");
+                local Ping = string.format("%.2f ms", game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue());
+                local Time = os.date("%H:%M");
 
-                    for _,v in ipairs(game:GetService("CoreGui"):GetChildren()) do
-                        if v.Name == "MacLib" then
-                            local PathDisplay = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("DisplayName");
-                            local PathUsername = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("Username");
-                            local HeadShot = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup:FindFirstChild("Headshot");
-
-                            PathDisplay.Text = Ping.." | "..CurrentDate.." | "..Time;
-                            PathDisplay.TextSize = 11;
-
-                            PathUsername.Text = "RunTime: "..convertToHMS(time());
-                            HeadShot.Visible = false;
-                        end
-                    end
-                end)
-                task.wait(1);
-            end
-        end)
-
-        task.spawn(function()
-            while true do
-                local FPS = math.round(1/game:GetService("RunService").RenderStepped:Wait());
-                for _, v in ipairs(game:GetService("CoreGui"):GetChildren()) do
+                for _,v in ipairs(game:GetService("CoreGui"):GetChildren()) do
                     if v.Name == "MacLib" then
+                        local PathDisplay = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("DisplayName");
                         local PathUsername = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup.UserAndDisplayFrame:FindFirstChild("Username");
-                        PathUsername.Text = "RunTime: "..convertToHMS(time()).." | FPS: "..FPS;
+                        local HeadShot = v.Base.Sidebar.SidebarGroup.UserInfo.InformationGroup:FindFirstChild("Headshot");
+
+                        PathDisplay.Text = Ping.." | "..CurrentDate.." | "..Time;PathDisplay.TextSize = 11;
+                        PathUsername.Text = "RunTime: "..convertToHMS(time());
+                        HeadShot.Visible = false;
                     end
                 end
-            end
-        end)
+            end)
+        end
     end
 end)
 
