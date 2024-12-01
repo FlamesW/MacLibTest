@@ -416,7 +416,7 @@ function MacLib:Window(Settings)
     icon.ImageColor3 = Color3.fromRGB(255, 255, 255)
     icon.BackgroundTransparency = 1
     icon.Size = Settings.ImgSize
-    icon.Position = UDim2.new(-0.100000006, 0, 0, 8)
+    icon.Position = UDim2.new(-0.0799999982, 0, 0, 8)
     icon.AnchorPoint = Vector2.new(0, 0.5)
     icon.Parent = title
 
@@ -1811,7 +1811,7 @@ function MacLib:Window(Settings)
 
 						ToggleFunctions.State = State
 					end
-
+	
 					local togglebool = ToggleFunctions.Settings.Default or false
 					ToggleState(togglebool)
 
